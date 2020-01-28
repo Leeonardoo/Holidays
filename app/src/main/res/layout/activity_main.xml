@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".CountryYearSelection">
 
+    <it.sephiroth.android.library.numberpicker.NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/NumberPicker.Outlined"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:picker_disableGestures="true"
+        app:picker_tracker="linear"
+        app:picker_orientation="vertical"
+        app:picker_max="2500"
+        app:picker_min="1500"
+        app:picker_stepSize="1">
+
+    </it.sephiroth.android.library.numberpicker.NumberPicker>
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -18,26 +35,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="189dp"
-        android:ems="10"
-        android:hint="Ano"
-        android:inputType="date"
-        android:maxLength="4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="País (ex: BR)"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="354dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
