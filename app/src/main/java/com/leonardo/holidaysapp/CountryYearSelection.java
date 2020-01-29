@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,7 +19,7 @@ import it.sephiroth.android.library.numberpicker.NumberPicker;
 
 public class CountryYearSelection extends AppCompatActivity {
     EditText countryText;
-    Button button;
+    MaterialButton button;
     String country;
     int year;
     NumberPicker materialNumberPicker;
@@ -43,7 +45,6 @@ public class CountryYearSelection extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
         materialNumberPicker.setProgress(Integer.parseInt(df.format(d)));

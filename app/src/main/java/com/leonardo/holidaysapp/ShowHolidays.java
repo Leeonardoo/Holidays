@@ -1,11 +1,15 @@
 package com.leonardo.holidaysapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,9 +54,6 @@ public class ShowHolidays extends AppCompatActivity {
                 Show(response.body());
                 List<Holidays> holidays = response.body();
                 for (Holidays holiday : holidays) {
-                    String content = "";
-                    content += "DATE: " + holiday.getDate() + "\n";
-                    content += "LOCALNAME: " + holiday.getLocalName() + "\n\n";
                 }
             }
 
@@ -63,12 +64,20 @@ public class ShowHolidays extends AppCompatActivity {
             }
 
             private void Show(List<Holidays> response){
-                HolidaysAdapter holidaysAdapter = new HolidaysAdapter(response,getApplicationContext());
+                HolidaysAdapter holidaysAdapter = new HolidaysAdapter(response, new HolidaysAdapter.OnItemClickListener(){
+
+                    @Override
+                    public void onItemClick(Holidays item) {
+                        Toast.makeText(getApplicationContext(), "Item Clicked " + item.getLocalName(), Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(getBaseContext(), DetailsActivity.class);
+                        i.putExtra("NAME", item.getName());
+                        i.putExtra("DATE", item.getDate());
+                        i.putExtra("LOCAL_NAME", item.getLocalName());
+                        startActivity(i);
+                    }
+                });
                 recyclerView.setAdapter(holidaysAdapter);
             }
         });
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
