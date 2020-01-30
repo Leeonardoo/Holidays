@@ -49,11 +49,23 @@
 
             <TextView
                 android:id="@+id/textDate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:fontFamily="@font/quicksand_semibold"
-                android:text="TextView"
+                android:text="00/00/0000"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textInXDays"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:duplicateParentState="false"
+                android:fontFamily="@font/quicksand_semibold"
+                android:maxLength="25"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorAccent"
+                android:visibility="gone" />
 
         </LinearLayout>
 

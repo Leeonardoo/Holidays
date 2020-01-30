@@ -14,21 +14,21 @@
         <activity
             android:name=".DetailsActivity"
             android:label="@string/title_activity_details"
-            android:parentActivityName=".ShowHolidays"
+            android:parentActivityName=".ShowHolidaysActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.leonardo.holidaysapp.ShowHolidays" />
+                android:value="com.leonardo.holidaysapp.ShowHolidaysActivity" />
         </activity>
         <activity
-            android:name=".ShowHolidays"
+            android:name=".ShowHolidaysActivity"
             android:label="@string/title_activity_show_holidays"
-            android:parentActivityName=".CountryYearSelection"
+            android:parentActivityName=".SelectionActivity"
             android:launchMode="singleInstance">
         </activity>
 
         <activity
-            android:name=".CountryYearSelection"
+            android:name=".SelectionActivity"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

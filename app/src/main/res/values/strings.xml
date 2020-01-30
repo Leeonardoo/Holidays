@@ -1,7 +1,30 @@
 <resources>
     <string name="app_name">App Feriados</string>
     <string name="title_activity_details">Detalhes</string>
-    <string name="action_settings">Configurações</string>
     <string name="title_activity_show_holidays">Lista de feriados</string>
+    
+    <string name="ready_button_text">Pronto!</string>
+    <string name="country_input_hint">País</string>
+    <string name="year_input_hint">Ano</string>
+    <string name="selection_activity_title">Pesquisar Feriados</string>
+    <string name="selection_activity_subtitle">Para começar escolha um país e ano</string>
+    
+    <string name="details_applicable_to">Aplicável ao(s) município(s):</string>
+    <string name="details_calendar_icon">Calendar icon</string>
+    <string name="details_since">Desde:</string>
+    <string name="datails_all_counties">Ocorre em todos os municípios</string>
+    <string name="details_fixed_date">Data fixa</string>
+    <string name="datails_happens_on">Acontece no dia:</string>
+    <string name="details_aka">Também conhecido no país como:</string>
+
+    <string name="show_loading">Carregando</string>
+
+    <string name="alert_wait">Espera aí!</string>
+    <string name="alert_ok">OK</string>
+    <string name="alert_country">Você precisa escolher um país!</string>
+    <string name="alert_unexpected_response">Resposta incorreta recebida! API fora do ar ou dados inválidos escolhidos. Tente novamente.</string>
+    <string name="alert_connection_error">Ocorreu um erro na conexão com o servidor. Verifique a sua conexão com a internet e tente novamente.</string>
+    <string name="alert_something_wrong">Algo deu errado...!</string>
+    <string name="alert_try_again">Tentar novamente</string>
 
 </resources>

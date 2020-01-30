@@ -1,11 +1,8 @@
 package com.leonardo.holidaysapp;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -19,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class CountryYearSelection extends AppCompatActivity {
+public class SelectionActivity extends AppCompatActivity {
     MaterialButton button;
     String country;
     int year;
@@ -30,47 +27,49 @@ public class CountryYearSelection extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_selection);
+
         autoCompleteTextView = findViewById(R.id.outlined_countries);
         textYear = findViewById(R.id.textInputYear);
-        button = findViewById(R.id.button);
+        button = findViewById(R.id.readyButton);
 
-        String[] countriesAbrv = getResources().getStringArray(R.array.countries_abrv_array);
+        //Lendo países de countries_array.xml e criando um novo adapter
+        String[] countriesAbbr = getResources().getStringArray(R.array.countries_abrv_array);
         String[] countries = getResources().getStringArray(R.array.countries_array);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), R.layout.dropdown_menu_item, countries);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(), R.layout.dropdown_menu_item, countries);
         autoCompleteTextView.setAdapter(adapter);
 
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                int pos = -1;
+        //Listener com um workarround (position != posição original)
+        autoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+            String selection = (String) parent.getItemAtPosition(position);
+            int pos = -1;
 
-                for (int i = 0; i < countries.length; i++) {
-                    if (countries[i].equals(selection)) {
-                        pos = i;
-                        break;
-                    }
+            for (int i = 0; i < countries.length; i++) {
+                if (countries[i].equals(selection)) {
+                    pos = i;
+                    break;
                 }
-                System.out.println(countriesAbrv[pos]);
-                country = countriesAbrv[pos];
             }
+            //Queremos apenas a sigla para a API
+            country = countriesAbbr[pos];
         });
 
 
         button.setOnClickListener(v -> {
             year = Integer.parseInt(textYear.getText().toString());
 
+            //Não pode pesquisar sem país selecionado
             if (country == null) {
                 showAlertDialog();
-            }
-            else {
-                Intent intent = new Intent(getApplicationContext(), ShowHolidays.class);
-                intent.putExtra("country", country);
-                intent.putExtra("year", year);
+            } else {
+                Intent intent = new Intent(getApplicationContext(), ShowHolidaysActivity.class);
+                intent.putExtra("COUNTRY", country);
+                intent.putExtra("YEAR", year);
                 startActivity(intent);
             }
         });
+
+        //Ano atual como padrão no textYear
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
         textYear.setText(df.format(d));
@@ -78,9 +77,9 @@ public class CountryYearSelection extends AppCompatActivity {
 
     public void showAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Espera aí!");
-        builder.setMessage("Você precisa escolher um país!");
-        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        builder.setTitle(R.string.alert_wait);
+        builder.setMessage(R.string.alert_country);
+        builder.setPositiveButton(R.string.alert_ok, (dialog, which) -> dialog.dismiss());
         builder.setCancelable(true);
         builder.show();
     }

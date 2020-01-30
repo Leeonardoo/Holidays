@@ -60,7 +60,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/quicksand_semibold"
-            android:text="Também conhecido no país como:"
+            android:text="@string/details_aka"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtNameDetails" />
 
@@ -71,7 +71,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/quicksand_semibold"
-            android:text="Acontece no dia:"
+            android:text="@string/datails_happens_on"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLocalNameDetails" />
 
@@ -83,7 +83,7 @@
             android:layout_marginTop="32dp"
             android:clickable="false"
             android:fontFamily="@font/quicksand_semibold"
-            android:text="Data fixa"
+            android:text="@string/details_fixed_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtDateDetails" />
 
@@ -94,7 +94,7 @@
             android:layout_marginStart="16dp"
             android:clickable="false"
             android:fontFamily="@font/quicksand_semibold"
-            android:text="Ocorre em todos os municípios"
+            android:text="@string/datails_all_counties"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkFixed" />
 
@@ -105,7 +105,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/quicksand_semibold"
-            android:text="Desde:"
+            android:text="@string/details_since"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -133,16 +133,17 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtHappensOn"
-            app:srcCompat="@drawable/ic_today_black_24dp" />
+            app:srcCompat="@drawable/ic_today_black_24dp"
+            android:contentDescription="@string/details_calendar_icon" />
 
         <TextView
-            android:id="@+id/txtIncludedCounties"
+            android:id="@+id/txtApplicableTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/quicksand_semibold"
-            android:text="Aplicável ao(s) município(s):"
+            android:text="@string/details_applicable_to"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkGlobal" />
@@ -155,7 +156,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/quicksand_semibold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtIncludedCounties" />
+            app:layout_constraintTop_toBottomOf="@+id/txtApplicableTo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

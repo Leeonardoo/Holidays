@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class DetailsActivity extends AppCompatActivity {
     TextView txtName, txtLocalName, txtDate, txtSince, txtSinceDetails, txtCounties, txtIncludedCounties;
     CheckBox checkFixed, checkGlobal;
@@ -32,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
         txtSince = findViewById(R.id.txtSince);
         txtSinceDetails = findViewById(R.id.txtSinceDetails);
         txtCounties = findViewById(R.id.txtCounties);
-        txtIncludedCounties = findViewById(R.id.txtIncludedCounties);
+        txtIncludedCounties = findViewById(R.id.txtApplicableTo);
 
         Intent i = getIntent();
         name = i.getStringExtra("NAME");
@@ -48,13 +50,13 @@ public class DetailsActivity extends AppCompatActivity {
         txtDate.setText(date);
         checkFixed.setChecked(fixed);
         checkGlobal.setChecked(global);
-        if(launchYear != null){
+        if (launchYear != null) {
             txtSince.setVisibility(View.VISIBLE);
             txtSinceDetails.setVisibility(View.VISIBLE);
             txtSinceDetails.setText(launchYear);
         }
 
-        if(counties != null){
+        if (counties != null) {
             txtIncludedCounties.setVisibility(View.VISIBLE);
             txtCounties.setVisibility(View.VISIBLE);
             for (String county : counties) {
@@ -62,7 +64,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
 }
