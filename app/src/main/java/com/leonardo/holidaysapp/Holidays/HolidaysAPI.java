@@ -1,4 +1,4 @@
-package com.leonardo.holidaysapp;
+package com.leonardo.holidaysapp.Holidays;
 
 import java.util.List;
 

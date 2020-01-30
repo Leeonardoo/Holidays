@@ -1,20 +1,19 @@
-package com.leonardo.holidaysapp;
+package com.leonardo.holidaysapp.Holidays;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.leonardo.holidaysapp.R;
+
 import java.util.List;
 
 public class HolidaysAdapter extends RecyclerView.Adapter<HolidaysAdapter.HolidayViewHolder> {
-    private List<Holidays> list;
-    private final OnItemClickListener listener;
+    List<Holidays> list;
+    final OnItemClickListener listener;
 
     public interface OnItemClickListener {
         void onItemClick(Holidays item);
@@ -46,21 +45,17 @@ public class HolidaysAdapter extends RecyclerView.Adapter<HolidaysAdapter.Holida
         return list.size();
     }
 
-    public class HolidayViewHolder extends RecyclerView.ViewHolder {
+    class HolidayViewHolder extends RecyclerView.ViewHolder {
         TextView localName, date;
 
-        public HolidayViewHolder(@NonNull View itemView) {
+        HolidayViewHolder(@NonNull View itemView) {
             super(itemView);
             localName = itemView.findViewById(R.id.textTitle);
             date = itemView.findViewById(R.id.textDate);
         }
 
-        public void bind(final Holidays item, final OnItemClickListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    listener.onItemClick(item);
-                }
-            });
+        void bind(final Holidays item, final OnItemClickListener listener) {
+            itemView.setOnClickListener(v -> listener.onItemClick(item));
         }
     }
 

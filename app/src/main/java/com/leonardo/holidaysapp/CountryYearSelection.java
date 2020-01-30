@@ -1,44 +1,70 @@
 package com.leonardo.holidaysapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import it.sephiroth.android.library.numberpicker.NumberPicker;
 
 public class CountryYearSelection extends AppCompatActivity {
-    EditText countryText;
     MaterialButton button;
     String country;
     int year;
-    NumberPicker materialNumberPicker;
+    TextInputEditText textYear;
+    AutoCompleteTextView autoCompleteTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        materialNumberPicker = findViewById(R.id.numberPicker);
-        countryText = findViewById(R.id.editText2);
+        autoCompleteTextView = findViewById(R.id.outlined_countries);
+        textYear = findViewById(R.id.textInputYear);
         button = findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        String[] countriesAbrv = getResources().getStringArray(R.array.countries_abrv_array);
+        String[] countries = getResources().getStringArray(R.array.countries_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), R.layout.dropdown_menu_item, countries);
+        autoCompleteTextView.setAdapter(adapter);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                country = countryText.getText().toString();
-                year = materialNumberPicker.getProgress();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selection = (String) parent.getItemAtPosition(position);
+                int pos = -1;
+
+                for (int i = 0; i < countries.length; i++) {
+                    if (countries[i].equals(selection)) {
+                        pos = i;
+                        break;
+                    }
+                }
+                System.out.println(countriesAbrv[pos]);
+                country = countriesAbrv[pos];
+            }
+        });
+
+
+        button.setOnClickListener(v -> {
+            year = Integer.parseInt(textYear.getText().toString());
+
+            if (country == null) {
+                showAlertDialog();
+            }
+            else {
                 Intent intent = new Intent(getApplicationContext(), ShowHolidays.class);
                 intent.putExtra("country", country);
                 intent.putExtra("year", year);
@@ -47,6 +73,15 @@ public class CountryYearSelection extends AppCompatActivity {
         });
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
-        materialNumberPicker.setProgress(Integer.parseInt(df.format(d)));
+        textYear.setText(df.format(d));
+    }
+
+    public void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Espera aí!");
+        builder.setMessage("Você precisa escolher um país!");
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        builder.setCancelable(true);
+        builder.show();
     }
 }

@@ -20,8 +20,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.leonardo.holidaysapp.ShowHolidays" />
         </activity>
-        <activity android:name=".ShowHolidays" />
-        <activity android:name=".CountryYearSelection">
+        <activity
+            android:name=".ShowHolidays"
+            android:label="@string/title_activity_show_holidays"
+            android:parentActivityName=".CountryYearSelection"
+            android:launchMode="singleInstance">
+        </activity>
+
+        <activity
+            android:name=".CountryYearSelection"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
